@@ -1,0 +1,33 @@
+.sign-up-form-main-container .sign-up-form input {
+  background: #f5f5f8;
+  border-radius: 7px;
+  margin: 7px 0;
+  padding: 14px 16px;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  font-weight: 500;
+  width: calc(100% - 32px);
+}
+
+.sign-up-form-horizontal-input-section{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#firstname,
+#lastname{
+  width: 42%;
+}
+
+#lastname{
+    margin-left: 10px;
+}
+
+.sign-up-form-main-container .sign-up-form input::placeholder {
+    color: #313131;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+  
