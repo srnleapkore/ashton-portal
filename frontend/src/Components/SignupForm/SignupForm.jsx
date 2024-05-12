@@ -1,12 +1,18 @@
 import { useState } from "react";
 import "./SignupForm.css";
 import { useNavigate } from "react-router-dom";
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from "../../redux/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function SignupForm() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({});
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const { loading, error: errorMessage } = useSelector((state) => state.user);
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
   };
@@ -21,14 +27,15 @@ export default function SignupForm() {
       !formData.password ||
       !formData.confirmpassword
     ) {
-      return setErrorMessage("Please fill out all required fields.");
+      return dispatch(signInFailure("Please fill out all required fields."));
     }
     if (formData.password !== formData.confirmpassword) {
-      return setErrorMessage("Password does not match with confirm password.");
+      return dispatch(
+        signInFailure("Password does not match with confirm password.")
+      );
     }
     try {
-      setLoading(true);
-      setErrorMessage(null);
+      dispatch(signInStart());
       const res = await fetch("/api/auth/sign-up", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -37,20 +44,17 @@ export default function SignupForm() {
       const data = await res.json();
       if (data.success === false) {
         if (data.message.includes("E11000 duplicate key error")) {
-          setLoading(false);
-          return setErrorMessage("Email already exists.");
+          dispatch(signInFailure("Email already exists."));
         } else {
-          setLoading(false);
-          return setErrorMessage(data.message);
+          dispatch(signInFailure(data.message));
         }
       }
-      setLoading(false);
       if (res.ok) {
+        dispatch(signInSuccess(data));
         navigate("/login");
       }
     } catch (error) {
-      setErrorMessage(error.message);
-      setLoading(false);
+      dispatch(signInFailure(error.message));
     }
   };
 
