@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./SignupForm.css";
 import { useNavigate } from "react-router-dom";
 import {
   signInStart,
   signInSuccess,
   signInFailure,
+  clearError,
 } from "../../redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -13,6 +14,11 @@ export default function SignupForm() {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({});
   const { loading, error: errorMessage } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    dispatch(clearError());
+  }, [dispatch]);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
   };

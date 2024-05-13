@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./LoginForm.css";
 import { useNavigate } from "react-router-dom";
-import { signInStart, signInSuccess, signInFailure } from "../../redux/userSlice";
+import { signInStart, signInSuccess, signInFailure, clearError } from "../../redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function LoginForm() {
@@ -9,6 +9,11 @@ export default function LoginForm() {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({});
   const { loading, error: errorMessage } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    dispatch(clearError());
+  }, [dispatch]);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
   };
