@@ -1,0 +1,134 @@
+.investor-sidebar-main-container {
+  background: #031b3d;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding: 20px 10px;
+  width: calc(100% - 20px);
+  min-height: calc(100% - 40px);
+}
+
+.investor-sidebar-main-container .investor-sidebar-child-container {
+  border: 0px solid #fff;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.investor-sidebar-child-container .investor-sidebar-logo-container {
+  background-color: transparent;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.investor-sidebar-logo-container .investor-sidebar-logo {
+  background: url("../../assets/AG-Logo_white.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100%;
+  height: 50px;
+}
+
+.investor-sidebar-menu-container {
+  margin-top: -15px;
+}
+
+.investor-sidebar-menu-container ul li {
+  list-style: none;
+  margin: 5px 0px;
+  margin-left: -35px;
+  padding: 9px 15px;
+  width: 100%;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.investor-sidebar-menu-container ul li.active {
+  background: linear-gradient(45deg, #a2cdd9, #c9dde7);
+}
+
+.investor-sidebar-menu-container ul li.active a {
+  color: #031b3d;
+}
+
+.investor-sidebar-menu-container ul li a {
+  text-decoration: none;
+  color: #fff;
+}
+
+#sidebar-menu-icon {
+  margin-right: 8px;
+}
+
+#sidebar-menu-icon-linear {
+  margin-right: 10px;
+}
+
+#sidebar-menu-icon-circle {
+  margin-right: 7px;
+}
+
+.investor-sidebar-menu-category-title {
+  margin-left: -35px;
+  width: 100%;
+  padding: 0px;
+}
+
+.investor-sidebar-menu-category-title p {
+  color: #c9dde7;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.investor-sidebar-bottom-container{
+  width: calc(100% - 24px);
+  margin-top: 20px;
+  padding: 10px 12px;
+  height: auto;
+  border-radius: 10px;
+  background: linear-gradient(125deg, #2a3f5fa0, #1a3255ba);
+}
+
+.investor-sidebar-bottom-container .investor-sidebar-bottom-child-container{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+}
+
+.investor-sidebar-bottom-child-container h5{
+  margin: 0px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #c9dde7;
+}
+
+.investor-sidebar-bottom-child-container h6{
+  font-size: 10px;
+  font-weight: 400;
+  color: #c9dde7a7;
+  margin: 10px 0;
+  margin-top: 5px;
+}
+
+#investor-sidebar-button-button{
+  border: none;
+  background: #fff;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  color: #031b3d;
+  border-radius: 25px;
+  padding: 5px 10px;
+  padding-bottom: 6px;
+}
+
+#investor-sidebar-button-button i{
+  margin-left: 5px;
+}

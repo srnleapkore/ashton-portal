@@ -1,0 +1,24 @@
+.investor-page-main-container {
+  background: #f0f0f0;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  flex-direction: row;
+}
+
+.investor-page-left-container {
+  width: 270px;
+  min-width: 220px;
+  height: 100%;
+}
+
+.investor-page-right-container {
+  width: calc(100% - 40px);
+  height: 100%;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+}

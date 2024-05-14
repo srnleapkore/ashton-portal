@@ -36,7 +36,7 @@ export default function LoginForm() {
       }
       if (res.ok) {
         dispatch(signInSuccess(data));
-        navigate("/");
+        navigate("/investor-portal");
       }
     } catch (error) {
       dispatch(signInFailure(error.message));

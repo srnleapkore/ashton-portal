@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "https://cdn2.f-cdn.com/files/download/38545966/4bce6b.jpg",
     },
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
     isProspect: {
       type: Boolean,
       default: false,

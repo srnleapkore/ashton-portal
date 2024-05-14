@@ -1,0 +1,79 @@
+.account-sidebar-main-container {
+    background: #031b3d;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 20px 10px;
+    width: calc(100% - 20px);
+    min-height: calc(100vh - 40px);
+  }
+  
+  .account-sidebar-main-container .account-sidebar-child-container {
+    border: 0px solid #fff;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .account-sidebar-child-container .account-sidebar-logo-container {
+    background-color: transparent;
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .account-sidebar-logo-container .account-sidebar-logo {
+    background: url("../../assets/AG-Logo_white.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100%;
+    height: 50px;
+  }
+  
+  .account-sidebar-menu-container {
+    margin-top: -15px;
+  }
+  
+  .account-sidebar-menu-container ul li {
+    list-style: none;
+    margin: 5px 0px;
+    margin-left: -35px;
+    padding: 9px 15px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 400;
+  }
+  
+  .account-sidebar-menu-container ul li.active {
+    background: linear-gradient(45deg, #a2cdd9, #c9dde7);
+  }
+  
+  .account-sidebar-menu-container ul li.active a {
+    color: #031b3d;
+  }
+  
+  .account-sidebar-menu-container ul li a {
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  #sidebar-menu-icon {
+    margin-right: 8px;
+  }
+  
+  #sidebar-menu-icon-linear {
+    margin-right: 10px;
+  }
+  
+  #sidebar-menu-icon-circle {
+    margin-right: 7px;
+  }
+  
+  
+  #sidebar-menu-icon-square {
+    margin-right: 9.5px;
+  }
+  
