@@ -38,7 +38,7 @@
 
 .investor-sidebar-menu-container ul li {
   list-style: none;
-  margin: 5px 0px;
+  margin: 10px 0px;
   margin-left: -35px;
   padding: 9px 15px;
   width: 100%;
@@ -49,6 +49,10 @@
 
 .investor-sidebar-menu-container ul li.active {
   background: linear-gradient(45deg, #a2cdd9, #c9dde7);
+}
+
+.investor-sidebar-menu-container ul li:hover{
+  background-color: #54ccba1f;
 }
 
 .investor-sidebar-menu-container ul li.active a {
@@ -80,7 +84,7 @@
 
 .investor-sidebar-menu-category-title p {
   color: #c9dde7;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
 }
 
@@ -104,13 +108,13 @@
 
 .investor-sidebar-bottom-child-container h5{
   margin: 0px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   color: #c9dde7;
 }
 
 .investor-sidebar-bottom-child-container h6{
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 400;
   color: #c9dde7a7;
   margin: 10px 0;
@@ -120,13 +124,14 @@
 #investor-sidebar-button-button{
   border: none;
   background: #fff;
-  font-size: 10px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 600;
   letter-spacing: 0.3px;
   color: #031b3d;
   border-radius: 25px;
   padding: 5px 10px;
   padding-bottom: 6px;
+  font-family: 'Noto sans', sans-serif;
 }
 
 #investor-sidebar-button-button i{

@@ -1,0 +1,48 @@
+.collapsible-container {
+  border: none;
+  margin: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.collapsible-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f5f5f8;
+  cursor: pointer;
+}
+
+.collapsible-header h3 {
+  text-align: left;
+  color: #031b3d;
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.collapsible-header button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;    
+  color: #031b3d;
+}
+
+.collapsible-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  padding: 0 10px;
+  background-color: #f5f5f8;
+}
+
+.collapsible-content.open {
+  padding: 10px;
+}
+
+.collapsible-header i{
+  color: #031b3d;
+}
+

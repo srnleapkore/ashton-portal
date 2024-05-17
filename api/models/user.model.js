@@ -26,9 +26,13 @@ const userSchema = new mongoose.Schema(
     },
     profilepicture: {
       type: String,
-      default: "https://cdn2.f-cdn.com/files/download/38545966/4bce6b.jpg",
+      default: "https://img.freepik.com/free-photo/widely-smiling-businesswoman-working-laptop-sitting-cafe_197531-341.jpg",
     },
-    isVerified: {
+    isEmailVerified: {
+      type: Boolean,
+      default: false,
+    },
+    isPhoneVerified: {
       type: Boolean,
       default: false,
     },

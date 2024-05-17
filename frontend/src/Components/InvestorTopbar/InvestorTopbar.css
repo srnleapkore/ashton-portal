@@ -13,15 +13,15 @@
 
 .investor-topbar-child-container .investor-topbar-text-container h5 {
   font-size: 22px;
-  font-weight: 600;
-  color: #54ccba;
+  font-weight: 700;
+  color: #031b3d;
   margin: 0px;
 }
 
 .investor-topbar-child-container .investor-topbar-text-container p {
   font-size: 14px;
   font-weight: 500;
-  color: #313131;
+  color: #54ccba;
   margin: 0px;
 }
 
@@ -67,86 +67,134 @@
 .profile-image-container .profile-image-child-container img {
   border-radius: 50%;
   margin-top: 5px;
+  object-fit: cover;
+}
+
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    width: 200px;
+    max-height: 0;
+    padding: 0px;
+  }
+  1%{
+    padding: 15px 15px;
+  }
+  100% {
+    opacity: 1;
+    max-height: 270px;
+    width: 200px;
+    padding: 15px 15px;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 1;
+    max-height: 270px;
+    width: 200px;
+    padding: 15px 15px;
+  }
+  99% {
+    width: 200px;
+    padding: 15px 15px;
+  }
+  100% {
+    opacity: 0;
+    max-height: 0;
+    width: 0px;
+    padding: 0;
+  }
 }
 
 .dropdown-menu {
   position: absolute;
   top: 60px;
-  left: calc(100% - 180px);
-  background: linear-gradient(45deg, #031b3d, #031b3ddc);
+  left: calc(100% - 250px);
+  background: linear-gradient(45deg, #031b3d, #031b3de6);
   border-radius: 10px;
-  padding: 15px 15px;
-  width: 130px;
-  height: auto;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  opacity: 0;
-  transform: translateY(-10px);
-  visibility: hidden;
+  box-shadow: 0 0 5px 1px #031b3d35;
+  padding: 0;
+  width: 0px;
+  max-height: 0px;
+  overflow: hidden;
+  z-index: 99;
+  transition: opacity 0.3s ease, max-height 0.3s ease;
 }
 
-.profile-image-container:hover .dropdown-menu,
-.profile-image-container .dropdown-menu {
+.profile-image-container:hover .dropdown-menu {
   opacity: 1;
-  transform: translateY(0);
+  max-height: 270px;
   visibility: visible;
+  animation: slideDown 0.5s ease forwards;
+}
+
+.profile-image-container .dropdown-menu.slideUp {
+  transition-delay: 0.3s;
+  animation: slideUp 0.3s ease forwards;
+  padding: 0;
 }
 
 .dropdown-menu h5 {
   margin: 0px;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
-  color: #54ccba;
+  color: #fff;
 }
 
 .dropdown-menu p {
   margin: 2px 0px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
-  color: #fff;
+  color: #54ccba;
 }
 
-.dropdown-menu ul{
+.dropdown-menu ul {
   margin: 12px 0;
 }
 
-.dropdown-menu ul li{
+.dropdown-menu ul li {
   list-style: none;
   margin: 7px 0px;
   margin-left: -40px;
-  color: #c9dde788;
-  font-size: 11px;
-  font-weight: 500;
+  color: #f5f5f8;
+  font-size: 12px;
+  font-weight: 400;
+  margin-bottom: 15px;
 }
 
-.dropdown-menu ul li a{
+.dropdown-menu ul li a {
   text-decoration: none;
-  color: #C9DDE7;
-  font-size: 11px;
+  color: #f5f5f8;
+  font-size: 14px;
   font-weight: 400;
   transition: 0.3s ease-in;
   margin-left: 5px;
 }
 
-.dropdown-menu ul li a:hover{
-  color: #f5f5f8;
+.dropdown-menu ul li a:hover {
+  font-weight: 500;
+  color: #fff;
   transition: 0.3s ease-in;
 }
 
-#dropdown-profile-logout-button{
-  background: #fff;
+#dropdown-profile-logout-button {
+  background: transparent;
+  border: 1.5px solid #f5f5f8;
   border-radius: 25px;
   padding: 4px 10px;
+  margin-top: 5px;
+  margin-bottom: 3px;
   padding-bottom: 5px;
-  color: #313131;
-  font-size: 11px;
-  font-weight: 500;
-  font-family: 'Noto sans', sans-serif;
-  border: none;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+  font-family: "Noto sans", sans-serif;
   transition: 0.3s ease-in;
 }
 
-#dropdown-profile-logout-button:hover{
-  background: #54ccba;
-  color: #fff;
+#dropdown-profile-logout-button:hover {
+  background: #f5f5f8;
+  color: #031b3d;
   transition: 0.3s ease-in;
 }

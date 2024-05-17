@@ -38,7 +38,7 @@
   
   .account-sidebar-menu-container ul li {
     list-style: none;
-    margin: 5px 0px;
+    margin: 10px 0px;
     margin-left: -35px;
     padding: 9px 15px;
     width: 100%;
@@ -53,6 +53,10 @@
   
   .account-sidebar-menu-container ul li.active a {
     color: #031b3d;
+  }
+
+  .account-sidebar-menu-container ul li:hover{
+    background-color: #54ccba1f;
   }
   
   .account-sidebar-menu-container ul li a {

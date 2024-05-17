@@ -1,0 +1,355 @@
+.profile-section-main-container {
+  margin: 0px;
+}
+
+.profile-section-child-container{
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.profile-section-child-container .profile-section-left-container{
+  width: 35%;
+  padding: 0px;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-setting-image-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #031b3d;
+  border-radius: 10px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  padding: 15px 15px;
+  width: calc(100% - 30px);
+  padding-bottom: 30px;
+}
+
+.profile-section-left-container h1{
+  color: #c9dde7;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0px;
+}
+
+.profile-section-left-container h3{
+  text-align: center;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0px;
+  margin-top: 15px;
+}
+
+.profile-section-left-container h4{
+  text-align: center;
+  color: #d9d9d9;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0px;
+  margin-top: 5px;
+}
+
+.profile-section-child-container .profile-section-right-container{
+  background-color: blue;
+  width: 65%;
+  margin-left: 20px;
+}
+
+.profile-section-left-container .profile-picture-edit-form{
+  width: 100%;
+  display: flex;
+  margin: 20px 0;
+  margin-bottom: 0px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-picture-edit-form img{
+  border: 1.5px solid #fff;
+ border-radius: 50%;
+ width: 85px;
+ height: 85px;
+ object-fit: cover;
+}
+
+#image-edit-icon{
+  position: absolute;
+  margin-top: 65px;
+  margin-left: 60px;
+  color: #54ccba;
+  font-size: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.profile-image-success-alert-section{
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+  color: #17b80b;
+  padding: 4px 5px;
+  padding-bottom: 5px;
+  margin: 10px 0;
+  margin-bottom: 0px;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-image-failure-alert-section{
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+  color: #c90707;
+  padding: 4px 5px;
+  padding-bottom: 5px;
+  margin: 10px 0;
+  margin-bottom: -15px;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+}
+
+#profile-picture-update-button{
+  width: 100%;
+  background-color: #d9d9d9;
+  color: #031b3d;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Noto sans', sans-serif;
+  border: none;
+  border-radius: 25px;
+  padding: 8px 12px;
+  padding-bottom: 10px;
+  margin-top: 15px;
+  margin-bottom: -10px;
+}
+
+#profile-picture-update-button:hover{
+  background-color: #fff;
+  color: #031b3d;
+}
+
+
+.image-uploading-indicator{
+  position: absolute;
+  margin-left: 0px;
+  width: 85px;
+  height: 85px;
+  background: #031b3d9b;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-uploading-indicator p{
+ font-size: 13px;
+ font-weight: 500;
+ color: #fff;
+}
+
+.profile-update-success-popup{
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 25px;
+  box-shadow: 0 2px 5px #031b3d23;
+  z-index: 9999;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Noto sans', sans-serif;
+  color: #54ccba;
+}
+
+.profile-update-success-popup p{
+  color: #031b3d;
+  margin: 0px;
+  font-size: 13px;
+  margin-left: 5px;
+}
+
+.profile-update-success-popup i{
+  margin-top: 1px;
+}
+
+
+.profile-update-failure-popup{
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 25px;
+  box-shadow: 0 2px 5px #031b3d23;
+  z-index: 9999;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Noto sans', sans-serif;
+  color: #c90707;
+}
+
+.profile-update-failure-popup p{
+  color: #c90707;
+  margin: 0px;
+  font-size: 13px;
+  margin-left: 5px;
+}
+
+.profile-update-failure-popup i{
+  margin-top: 1px;
+}
+
+.profile-setting-menu-container{
+  width: 100%;
+  min-height: 100px;
+  background-color: #fff;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  margin-top: -15px;
+}
+
+.collapsible-content-divider{
+  width: 100%;
+  height: 1px;
+  background: #d9d9d9;
+  opacity: 0.5;
+  margin: 0px;
+  margin-top: -5px;
+  margin-bottom: 10px;
+}
+
+.account-deactivation-container p{
+  font-size: 11px;
+  font-weight: 500;
+  margin: 10px 0;
+  color: #313131;
+}
+
+.account-deactivation-container p i{
+  color: #c90707;
+}
+
+.account-deactivation-container h6{
+  font-size: 12px;
+  font-weight: 600;
+  margin: 10px 0;
+  color: #031b3d;
+}
+
+.account-deactivation-container button{
+  width: 100%;
+  background-color: #031b3d;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'Noto sans', sans-serif;
+  border: none;
+  border-radius: 25px;
+  padding: 8px 20px;
+  padding-bottom: 10px;
+  margin: 5px 0;
+  margin-bottom: 5px;
+}
+
+.account-deactivation-container button:hover{
+  background-color: #54ccba;
+ 
+}
+
+
+.reset-pass-form input{
+  background: #fff;
+  border-radius: 7px;
+  margin: 7px 0;
+  padding: 10px 16px;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  font-weight: 500;
+  width: calc(100% - 32px);
+  font-family: 'Noto sans', sans-serif;
+}
+
+.reset-pass-form input::placeholder {
+  color: #313131;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+#password-reset-button{
+  width: 100%;
+  background-color: #031b3d;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'Noto sans', sans-serif;
+  border: none;
+  border-radius: 25px;
+  padding: 8px 20px;
+  padding-bottom: 10px;
+  margin: 5px 0;
+  margin-bottom: 5px;
+}
+
+#password-reset-button:hover{
+  background: #54ccba;
+}
+
+.reset-password-form p{
+  font-size: 11px;
+  font-weight: 500;
+  margin: 10px 0;
+  color: #313131;
+}
+
+.reset-password-form p i{
+  color: #54ccba;
+}
+
+
+.password-failure-alert-section{
+  width: calc(100% - 10px);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+  color: #c90707;
+  background: #ffaaaa;
+  padding: 4px 5px;
+  padding-top: 5px;
+  margin: 5px 0;
+  border-radius: 3px;
+}
