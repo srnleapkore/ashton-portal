@@ -6,6 +6,7 @@ import {
   signInSuccess,
   signInFailure,
   clearError,
+  signUpSuccess,
 } from "../../redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -56,7 +57,8 @@ export default function SignupForm() {
         }
       }
       if (res.ok) {
-        dispatch(signInSuccess(data));
+        dispatch(signInSuccess());
+        dispatch(signUpSuccess({ ...data, firstName: formData.firstname }));
         navigate("/login");
       }
     } catch (error) {
@@ -117,7 +119,14 @@ export default function SignupForm() {
         </div>
         {errorMessage && <div className="alert-section">{errorMessage}</div>}
         <button className="form-button" disabled={loading}>
-          {loading ? "Loading" : "Sign Up"}
+          {loading ? (
+            <p>
+              <i className="fa fa-circle-o-notch fa-spin"></i>
+              Loading
+            </p>
+          ) : (
+            "Sign Up"
+          )}
         </button>
       </form>
     </div>

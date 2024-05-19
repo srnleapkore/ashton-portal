@@ -41,6 +41,7 @@ export default function ProfileComponent() {
   const [formData, setFormData] = useState({});
   const [passwordFormData, setPasswordFormData] = useState({});
   const [showDeleteFunction, setShowDeleteFunction] = useState(false);
+  const [showEmailEditForm, setShowEmailEditForm] = useState(false);
   const [passwordUpdateSuccess, setPasswordUpdateSuccess] = useState(null);
   const filePickerRef = useRef();
 
@@ -231,6 +232,18 @@ export default function ProfileComponent() {
     };
   }, [passwordUpdateSuccess, dispatch]);
 
+  useEffect(() => {
+    let timer;
+    if (errorPassUpdate) {
+      timer = setTimeout(() => {
+        dispatch(updatePasswordFailure(null));
+      }, 30000);
+    }
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [errorPassUpdate, dispatch]);
+
   const handleCancelDeletion = () => {
     setShowDeleteFunction(false);
   };
@@ -309,6 +322,7 @@ export default function ProfileComponent() {
               </div>
             </div>
             <div className="profile-setting-menu-container">
+              <h1>Security</h1>
               <Collapsible title="Reset Password">
                 <div className="reset-password-form">
                   <div className="collapsible-content-divider"></div>
@@ -372,7 +386,119 @@ export default function ProfileComponent() {
             </div>
           </div>
 
-          <div className="profile-section-right-container"></div>
+          <div className="profile-section-right-container">
+            <div className="profile-section-right-child-container">
+              <h1>Personal Info</h1>
+              <div className="horizontal-grid">
+                <div className="personal-info-idv-form-editor">
+                  <div className="personal-info-idv-form-editor-text-container">
+                    <div className="personal-info-idv-form-editable-label">
+                      <h4>First Name</h4>
+                    </div>
+                    <div
+                      className="personal-info-idv-form-editable-option"
+                      hidden
+                    >
+                      <i className="fa-solid fa-pen-to-square"></i>
+                    </div>
+                  </div>
+                  <div className="personal-info-idv-form-editor-input-container">
+                    <input
+                      id="input-before-editable-firstname"
+                      type="text"
+                      placeholder={currentUser.firstname}
+                      disabled
+                    />
+                  </div>
+                </div>
+                <div className="personal-info-idv-form-editor">
+                  <div className="personal-info-idv-form-editor-text-container">
+                    <div className="personal-info-idv-form-editable-label">
+                      <h4>Last Name</h4>
+                    </div>
+                    <div
+                      className="personal-info-idv-form-editable-option"
+                      hidden
+                    ></div>
+                  </div>
+                  <div className="personal-info-idv-form-editor-input-container">
+                    <input
+                      id="input-before-editable-lastname"
+                      type="text"
+                      placeholder={currentUser.lastname}
+                      disabled
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="horizontal-grid" id="margin-40px-top">
+                <div className="personal-info-idv-form-editor">
+                  <div className="personal-info-idv-form-editor-text-container">
+                    <div className="personal-info-idv-form-editable-label">
+                      <h4>Email</h4>
+                    </div>
+                    <div className="personal-info-idv-form-editable-option">
+                      {showEmailEditForm ? (
+                        <i
+                          onClick={() => setShowEmailEditForm(false)}
+                          className="fa-solid fa-circle-xmark"
+                        ></i>
+                      ) : (
+                        <i
+                          onClick={() => setShowEmailEditForm(true)}
+                          className="fa-solid fa-pen-to-square"
+                        ></i>
+                      )}
+                    </div>
+                  </div>
+                  <div className="personal-info-idv-form-editor-input-container">
+                    {showEmailEditForm ? (
+                      <div className="input-after-editable-container">
+                        <input
+                          id="input-after-editable-email"
+                          type="text"
+                          placeholder="Enter new email"
+                        />
+                        <p>
+                          <i className="fa-solid fa-circle-info"></i> OTP will
+                          be sent to the new email entered and to the phone
+                          number.
+                        </p>
+                        <button id="send-otp-button-profile">Send OTP</button>
+                      </div>
+                    ) : (
+                      <input
+                        id="input-before-editable-email"
+                        type="text"
+                        placeholder={currentUser.email}
+                        disabled
+                      />
+                    )}
+                  </div>
+                </div>
+                <div className="personal-info-idv-form-editor">
+                  <div className="personal-info-idv-form-editor-text-container">
+                    <div className="personal-info-idv-form-editable-label">
+                      <h4>Phone Number</h4>
+                    </div>
+                    <div className="personal-info-idv-form-editable-option">
+                      <i className="fa-solid fa-pen-to-square"></i>
+                    </div>
+                  </div>
+                  <div className="personal-info-idv-form-editor-input-container">
+                    <input
+                      id="input-before-editable"
+                      type="text"
+                      placeholder={currentUser.phone}
+                      disabled
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {updateProfileSuccess && (
             <div className="profile-update-success-popup">
               <i className="fa-solid fa-circle-check"></i>

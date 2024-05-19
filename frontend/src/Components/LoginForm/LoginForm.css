@@ -33,3 +33,33 @@
   color: #031b3d;
   transition: 0.3s ease-in;
 }
+
+#resend-verification-link{
+  width: 100%;
+  background: #031b3d;
+  border-radius: 25px;
+  margin: 7px 0;
+  padding: 14px 16px;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Noto sans', sans-serif;
+  transition: 0.3s ease-in;
+  cursor: pointer;
+}
+
+#resend-verification-link p{
+  margin: 0px;
+}
+
+#resend-verification-link i{
+  margin: 0px;
+  margin-right: 10px;
+}
+
+#resend-verification-link:hover{
+  background: #54ccba;
+  color: #fff;
+}

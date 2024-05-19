@@ -30,4 +30,14 @@
     font-weight: 500;
 }
 
+.form-button p{
+  margin: 0px;
+}
+
+.form-button i{
+  margin: 0px;
+  margin-right: 10px;
+}
+
   
+

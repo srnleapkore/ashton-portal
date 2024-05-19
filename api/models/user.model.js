@@ -28,23 +28,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "https://img.freepik.com/free-photo/widely-smiling-businesswoman-working-laptop-sitting-cafe_197531-341.jpg",
     },
-    isEmailVerified: {
-      type: Boolean,
-      default: false,
-    },
-    isPhoneVerified: {
-      type: Boolean,
-      default: false,
-    },
-    isProspect: {
-      type: Boolean,
-      default: false,
-    },
-    isInvestor: {
-      type: Boolean,
-      default: false,
-    },
-    isSalesStaff: {
+    isAccountVerified: {
       type: Boolean,
       default: false,
     },

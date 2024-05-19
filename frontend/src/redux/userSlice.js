@@ -5,6 +5,8 @@ const initialState = {
   error: null,
   loading: false,
   errorPassUpdate: null,
+  signUpData: null,
+  resendbuttonloading: null,
 };
 
 const userSlice = createSlice({
@@ -23,6 +25,18 @@ const userSlice = createSlice({
     signInFailure: (state, action) => {
       state.loading = false;
       state.error = action.payload;
+    },
+    signUpSuccess: (state, action) => {
+      state.signUpData = action.payload;
+    },
+    resendVerifyStart: (state) => {
+      state.resendbuttonloading = true;
+    },
+    resendVerifySucces: (state) => {
+      state.resendbuttonloading = false;
+    },
+    resendVerifyFailure: (state) => {
+      state.resendbuttonloading = false;
     },
     clearError: (state) => {
       state.error = null;
@@ -79,6 +93,10 @@ export const {
   signInStart,
   signInSuccess,
   signInFailure,
+  signUpSuccess,
+  resendVerifyStart,
+  resendVerifySucces,
+  resendVerifyFailure,
   clearError,
   updateStart,
   updateSuccess,
