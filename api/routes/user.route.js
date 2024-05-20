@@ -1,5 +1,5 @@
 import express from "express";
-import { deleteUser, signOut, test, updatePassword, updateProfile } from "../controllers/user.controller.js";
+import { deleteUser, resendOTPforEmail, sendOTPforEmail, signOut, test, updatePassword, updateProfile, verifyOTPforEmail } from "../controllers/user.controller.js";
 import { verifyToken } from "../utils/verifyUser.js";
 
 const router = express.Router();
@@ -18,5 +18,12 @@ router.delete("/delete/:userId", verifyToken, deleteUser);
 
 // Route to sign out a user
 router.post("/signout", signOut);
+
+router.post("/sendotp-email/:userId", verifyToken, sendOTPforEmail);
+
+router.post("/verifyotp-email/:userId", verifyToken, verifyOTPforEmail);
+
+router.post("/resendotp-email/:userId", verifyToken, resendOTPforEmail);
+
 
 export default router;

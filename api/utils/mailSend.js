@@ -26,7 +26,7 @@ const verifymail = async (email, link, userName) => {
             <p>Best regards,</p>
             <p><strong>Leapkore Team</strong></p>
             <hr style="border: none; border-top: 1px solid #ccc;"/>
-            <p style="font-size: 0.9em; color: #777;">This email was sent from an unmonitored mailbox. Please do not reply directly to this email.</p>
+            <p style="font-size: 0.9em; color: #777;">Please do not reply directly to this email.</p>
           </div>
         </div>
       `,

@@ -311,6 +311,8 @@
 }
 
 #password-reset-button{
+  opacity: 1;
+  cursor: pointer;
   width: 100%;
   background-color: #031b3d;
   color: #fff;
@@ -323,6 +325,20 @@
   padding-bottom: 10px;
   margin: 5px 0;
   margin-bottom: 5px;
+}
+
+#password-reset-button p{
+  margin: 0px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Noto sans', sans-serif;
+}
+
+#password-reset-button i{
+  margin: 0px;
+  margin-right: 10px;
+  color: #fff;
 }
 
 #password-reset-button:hover{
@@ -342,6 +358,18 @@
 
 
 .password-failure-alert-section{
+  width: calc(100% - 10px);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+  color: #c90707;
+  background: #ffaaaa;
+  padding: 4px 5px;
+  padding-top: 5px;
+  margin: 5px 0;
+  border-radius: 3px;
+}
+.failure-alert-section{
   width: calc(100% - 10px);
   text-align: center;
   font-size: 12px;
@@ -433,7 +461,7 @@
 }
 
 .input-after-editable-container p{
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 400;
   color: #313131;
 }
@@ -442,7 +470,8 @@
   color: #54ccba;
 }
 
-#send-otp-button-profile{
+#changeEmailButton{
+  opacity: 1;
   width: 100%;
   background-color: #031b3d;
   color: #fff;
@@ -457,10 +486,87 @@
   cursor: pointer;
 }
 
-#send-otp-button-profile:hover{
+#changeEmailButton:hover{
   background-color: #54ccba;
 }
 
 .personal-info-idv-form-editable-option i{
   cursor: pointer;
+}
+
+#password-reset-button:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+#password-reset-button:disabled:hover {
+  opacity: 0.75;
+  background: #031b3d;
+}
+
+
+#changeEmailButton:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+#changeEmailButton:disabled:hover {
+  opacity: 0.75;
+  background: #031b3d;
+}
+
+#changeEmailButton p{
+  margin: 0px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Noto sans', sans-serif;
+}
+
+#changeEmailButton i{
+  margin: 0px;
+  margin-right: 10px;
+  color: #fff;
+}
+
+#resend-email-otp{
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 11px;
+  font-family: 'Noto sans', sans-serif;
+  font-weight: 500;
+  color: #313131;
+  margin: 0;
+  margin-top: 15px;
+  padding: 0;
+  opacity: 1;
+}
+
+#resend-email-otp:hover{
+  color: #031b3d;
+}
+
+#resend-email-otp:disabled{
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+#resend-email-otp:disabled:hover{
+  color: #313131;
+}
+
+#resend-email-otp p{
+  margin: 0px;
+  color: #313131;
+  font-size: 11px;
+  font-family: 'Noto sans', sans-serif;
+  font-weight: 500;
+}
+
+#resend-email-otp i{
+  margin: 0px;
+  margin-right: 5px;
+  color: #313131;
 }

@@ -13,6 +13,9 @@ import {
   deleteUserFailure,
   deleteUserStart,
   deleteUserSuccess,
+  sendEmailOTPFailure,
+  sendEmailOTPStart,
+  sendEmailOTPSuccess,
   signoutSuccess,
   updateFailure,
   updatePasswordFailure,
@@ -20,15 +23,25 @@ import {
   updatePasswordSuccess,
   updateStart,
   updateSuccess,
+  verifyEmailOTPFailure,
+  verifyEmailOTPStart,
+  verifyEmailOTPSuccess,
 } from "../../redux/userSlice";
 import Collapsible from "../CollapsibleComponent/Collapsible.jsx";
 import DeleteConfirmationModal from "../DeleteConfirmation/DeleteConfirmation.jsx";
 
 export default function ProfileComponent() {
   const dispatch = useDispatch();
-  const { currentUser, error, errorPassUpdate } = useSelector(
-    (state) => state.user
-  );
+  const {
+    currentUser,
+    error,
+    errorPassUpdate,
+    errorEmailOtp,
+    sendEmailOTPLoading,
+    updatePasswordLoading,
+    errorVerifyEmailOtp,
+    verifyEmailOTPLoading,
+  } = useSelector((state) => state.user);
   const [imageFile, setImageFile] = useState(null);
   const [imageFileUrl, setImageFileUrl] = useState(null);
   const [imageFileUploadingProgress, setImageFileUploadingProgress] =
@@ -44,12 +57,169 @@ export default function ProfileComponent() {
   const [showEmailEditForm, setShowEmailEditForm] = useState(false);
   const [passwordUpdateSuccess, setPasswordUpdateSuccess] = useState(null);
   const filePickerRef = useRef();
+  const [isPasswordFormValid, setIsPasswordFormValid] = useState(false);
+  const [isEmailOTPFormValid, setIsEmailOTPFormValid] = useState(false);
+  const [resendOTPEmailDisable, setresendOTPEmailDisable] = useState(false);
+  const [isEmailOTPVerifyFormValid, setIsEmailOTPVerifyFormValid] =
+    useState(false);
+  const [emailChangeFormData, setEmailChangeFormData] = useState({
+    changeEmail: "",
+  });
+  const [emailChangeFormVerifyData, setEmailChangeFormVerifyData] = useState({
+    emailOTP: "",
+  });
+  const [emailOTPentryField, setEmailOTPentryField] = useState(false);
+  const [emailOptSentSuccess, setEmailOptSentSuccess] = useState(null);
+  const [emailOptVerifySuccess, setEmailOptVerifySuccess] = useState(null);
+
+  useEffect(() => {
+    const { currentPassword, newPassword, confirmPassword } = passwordFormData;
+    setIsPasswordFormValid(
+      currentPassword?.trim() && newPassword?.trim() && confirmPassword?.trim()
+    );
+  }, [passwordFormData]);
+
+  useEffect(() => {
+    const { changeEmail } = emailChangeFormData;
+    setIsEmailOTPFormValid(changeEmail?.trim());
+  }, [emailChangeFormData]);
+
+  useEffect(() => {
+    const { emailOTP } = emailChangeFormVerifyData;
+    setIsEmailOTPVerifyFormValid(emailOTP?.trim());
+  }, [emailChangeFormVerifyData]);
 
   const handlePasswordChange = (e) => {
     setPasswordFormData({ ...passwordFormData, [e.target.id]: e.target.value });
   };
 
+  const handleEmailOTPchange = (e) => {
+    setEmailChangeFormData({
+      ...emailChangeFormData,
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  const handleEmailOTPchangeVerify = (e) => {
+    setEmailChangeFormVerifyData({
+      ...emailChangeFormVerifyData,
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  const handleEmailOTP = async (e) => {
+    e.preventDefault();
+    if (!isEmailOTPFormValid) {
+      return;
+    }
+    if (Object.keys(emailChangeFormData).length === 0) {
+      return;
+    }
+    try {
+      dispatch(sendEmailOTPStart());
+      setEmailOptSentSuccess(null);
+      const res = await fetch(`/api/user/sendotp-email/${currentUser._id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(emailChangeFormData),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        dispatch(sendEmailOTPFailure(data.error));
+        setEmailOptSentSuccess(null);
+      } else {
+        dispatch(sendEmailOTPSuccess(data));
+        setEmailOTPentryField(true);
+        setresendOTPEmailDisable(true);
+        setEmailOptSentSuccess("OTP sent to your email!");
+      }
+    } catch (error) {
+      dispatch(sendEmailOTPFailure(error.message));
+      setEmailOptSentSuccess(null);
+    }
+  };
+
+  const handleEmailOTPVerify = async (e) => {
+    e.preventDefault();
+    if (!isEmailOTPVerifyFormValid) {
+      return;
+    }
+    if (Object.keys(emailChangeFormVerifyData).length === 0) {
+      return;
+    }
+    try {
+      dispatch(verifyEmailOTPStart());
+      setEmailOptVerifySuccess(null);
+      const res = await fetch(`/api/user/verifyotp-email/${currentUser._id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(emailChangeFormVerifyData),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        dispatch(verifyEmailOTPFailure(data.error));
+        setEmailOptVerifySuccess(null);
+      } else {
+        dispatch(verifyEmailOTPSuccess(data));
+        setEmailOptVerifySuccess(
+          "Email changed successfully. You'll be logged out in 5s."
+        );
+        setEmailChangeFormData({ changeEmail: "" });
+      }
+    } catch (error) {
+      dispatch(verifyEmailOTPFailure(error.message));
+      setEmailOptVerifySuccess(null);
+    }
+  };
+
+
+  const handleResendEmailOTP = async (e) => {
+    e.preventDefault();
+    if (!isEmailOTPFormValid) {
+      return;
+    }
+    if (Object.keys(emailChangeFormData).length === 0) {
+      return;
+    }
+    try {
+      dispatch(sendEmailOTPStart());
+      setEmailOptSentSuccess(null);
+      const res = await fetch(`/api/user/resendotp-email/${currentUser._id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(emailChangeFormData),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        dispatch(sendEmailOTPFailure(data.error));
+        setEmailOptSentSuccess(null);
+      } else {
+        dispatch(sendEmailOTPSuccess(data));
+        setresendOTPEmailDisable(true);
+        setEmailOptSentSuccess("OTP resent to your email!");
+      }
+    } catch (error) {
+      dispatch(sendEmailOTPFailure(error.message));
+      setEmailOptSentSuccess(null);
+    }
+  };
+
+
+
   const handlePasswordSubmit = async (e) => {
+    if (!isPasswordFormValid) {
+      return;
+    }
+
+    if (Object.keys(passwordFormData).length === 0) {
+      return;
+    }
     e.preventDefault();
     try {
       dispatch(updatePasswordStart());
@@ -221,6 +391,18 @@ export default function ProfileComponent() {
 
   useEffect(() => {
     let timer;
+    if (resendOTPEmailDisable) {
+      timer = setTimeout(() => {
+        setresendOTPEmailDisable(null);
+      }, 30000);
+    }
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [resendOTPEmailDisable]);
+
+  useEffect(() => {
+    let timer;
     if (passwordUpdateSuccess) {
       timer = setTimeout(() => {
         setPasswordUpdateSuccess(null);
@@ -234,6 +416,31 @@ export default function ProfileComponent() {
 
   useEffect(() => {
     let timer;
+    if (emailOptSentSuccess) {
+      timer = setTimeout(() => {
+        setEmailOptSentSuccess(null);
+      }, 5000);
+    }
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [emailOptSentSuccess]);
+
+  useEffect(() => {
+    let timer;
+    if (emailOptVerifySuccess) {
+      timer = setTimeout(() => {
+        setEmailOptVerifySuccess(null);
+        dispatch(signoutSuccess());
+      }, 5000);
+    }
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [emailOptVerifySuccess, dispatch]);
+
+  useEffect(() => {
+    let timer;
     if (errorPassUpdate) {
       timer = setTimeout(() => {
         dispatch(updatePasswordFailure(null));
@@ -243,6 +450,30 @@ export default function ProfileComponent() {
       clearTimeout(timer);
     };
   }, [errorPassUpdate, dispatch]);
+
+  useEffect(() => {
+    let timer;
+    if (errorEmailOtp) {
+      timer = setTimeout(() => {
+        dispatch(sendEmailOTPFailure(null));
+      }, 30000);
+    }
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [errorEmailOtp, dispatch]);
+
+  useEffect(() => {
+    let timer;
+    if (errorVerifyEmailOtp) {
+      timer = setTimeout(() => {
+        dispatch(verifyEmailOTPFailure(null));
+      }, 30000);
+    }
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [errorVerifyEmailOtp, dispatch]);
 
   const handleCancelDeletion = () => {
     setShowDeleteFunction(false);
@@ -353,8 +584,19 @@ export default function ProfileComponent() {
                       placeholder="Confirm Password"
                       onChange={handlePasswordChange}
                     />
-                    <button id="password-reset-button" type="submit">
-                      Update
+                    <button
+                      id="password-reset-button"
+                      type="submit"
+                      disabled={!isPasswordFormValid}
+                    >
+                      {updatePasswordLoading ? (
+                        <p>
+                          <i className="fa fa-circle-o-notch fa-spin"></i>
+                          Processing
+                        </p>
+                      ) : (
+                        "Update"
+                      )}
                     </button>
                   </form>
                   {errorPassUpdate && (
@@ -442,7 +684,7 @@ export default function ProfileComponent() {
                       {showEmailEditForm ? (
                         <i
                           onClick={() => setShowEmailEditForm(false)}
-                          className="fa-solid fa-circle-xmark"
+                          className="fa-solid fa-xmark"
                         ></i>
                       ) : (
                         <i
@@ -455,17 +697,85 @@ export default function ProfileComponent() {
                   <div className="personal-info-idv-form-editor-input-container">
                     {showEmailEditForm ? (
                       <div className="input-after-editable-container">
-                        <input
-                          id="input-after-editable-email"
-                          type="text"
-                          placeholder="Enter new email"
-                        />
-                        <p>
-                          <i className="fa-solid fa-circle-info"></i> OTP will
-                          be sent to the new email entered and to the phone
-                          number.
-                        </p>
-                        <button id="send-otp-button-profile">Send OTP</button>
+                        {emailOTPentryField ? (
+                          <div>
+                            <form onSubmit={handleEmailOTPVerify}>
+                              <input
+                                id="emailOTP"
+                                type="string"
+                                placeholder="Enter the 6 digit OTP"
+                                onChange={handleEmailOTPchangeVerify}
+                              />
+                              <p>
+                                <i className="fa-solid fa-circle-info"></i> An
+                                OTP has been sent to the provided email address.
+                                Please note that it will expire in 5 minutes.
+                              </p>
+                              {errorVerifyEmailOtp && (
+                                <div className="failure-alert-section">
+                                  {errorVerifyEmailOtp}
+                                </div>
+                              )}
+                              <button
+                                type="submit"
+                                id="changeEmailButton"
+                                disabled={!isEmailOTPVerifyFormValid}
+                              >
+                                {verifyEmailOTPLoading ? (
+                                  <p>
+                                    <i className="fa fa-circle-o-notch fa-spin"></i>
+                                    Processing
+                                  </p>
+                                ) : (
+                                  "Verify"
+                                )}
+                              </button>
+                            </form>
+                            <button id="resend-email-otp" disabled={resendOTPEmailDisable} onClick={handleResendEmailOTP}> {sendEmailOTPLoading ? (
+                                <p>
+                                  <i className="fa fa-circle-o-notch fa-spin"></i>
+                                  Processing
+                                </p>
+                              ) : (
+                                "Resend Code"
+                              )}</button>
+                          </div>
+                        ) : (
+                          <form onSubmit={handleEmailOTP}>
+                            <input
+                              id="changeEmail"
+                              type="email"
+                              placeholder="Enter new email"
+                              onChange={handleEmailOTPchange}
+                            />
+                            <p>
+                              <i className="fa-solid fa-circle-info"></i> A
+                              One-Time Password (OTP) will be sent to the newly
+                              entered email address. After verifying the OTP,
+                              you will be redirected and will need to sign in
+                              again using the new email address.
+                            </p>
+                            {errorEmailOtp && (
+                              <div className="failure-alert-section">
+                                {errorEmailOtp}
+                              </div>
+                            )}
+                            <button
+                              type="submit"
+                              id="changeEmailButton"
+                              disabled={!isEmailOTPFormValid}
+                            >
+                              {sendEmailOTPLoading ? (
+                                <p>
+                                  <i className="fa fa-circle-o-notch fa-spin"></i>
+                                  Processing
+                                </p>
+                              ) : (
+                                "Send OTP"
+                              )}
+                            </button>
+                          </form>
+                        )}
                       </div>
                     ) : (
                       <input
@@ -512,9 +822,23 @@ export default function ProfileComponent() {
             </div>
           )}
 
+          {emailOptSentSuccess && (
+            <div className="profile-update-success-popup">
+              <i className="fa-solid fa-circle-check"></i>
+              <p>{emailOptSentSuccess}</p>
+            </div>
+          )}
+
+          {emailOptVerifySuccess && (
+            <div className="profile-update-success-popup">
+              <i className="fa-solid fa-circle-check"></i>
+              <p>{emailOptVerifySuccess}</p>
+            </div>
+          )}
+
           {error && (
             <div className="profile-update-failure-popup">
-              <i className="fa-solid fa-circle-xmark"></i>
+              <i className="fa-solid fa-xmark"></i>
               <p>{error}</p>
             </div>
           )}

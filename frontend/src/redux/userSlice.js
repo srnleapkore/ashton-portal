@@ -5,6 +5,11 @@ const initialState = {
   error: null,
   loading: false,
   errorPassUpdate: null,
+  errorEmailOtp: null,
+  sendEmailOTPLoading: false,
+  verifyEmailOTPLoading: false,
+  errorVerifyEmailOtp: null,
+  updatePasswordLoading: false,
   signUpData: null,
   resendbuttonloading: null,
 };
@@ -56,18 +61,45 @@ const userSlice = createSlice({
       state.error = action.payload;
     },
     updatePasswordStart: (state) => {
-      state.loading = true;
+      state.updatePasswordLoading = true;
       state.errorPassUpdate = null;
     },
     updatePasswordSuccess: (state, action) => {
-      state.loading = false;
+      state.updatePasswordLoading = false;
       state.currentUser = action.payload;
       state.errorPassUpdate = null;
     },
     updatePasswordFailure: (state, action) => {
-      state.loading = false;
+      state.updatePasswordLoading = false;
       state.errorPassUpdate = action.payload;
     },
+
+    sendEmailOTPStart: (state) => {
+      state.sendEmailOTPLoading = true;
+      state.errorEmailOtp = null;
+    },
+    sendEmailOTPSuccess: (state) => {
+      state.sendEmailOTPLoading = false;
+      state.errorEmailOtp = null;
+    },
+    sendEmailOTPFailure: (state, action) => {
+      state.sendEmailOTPLoading = false;
+      state.errorEmailOtp = action.payload;
+    },
+
+    verifyEmailOTPStart: (state) => {
+      state.verifyEmailOTPLoading = true;
+      state.errorVerifyEmailOtp = null;
+    },
+    verifyEmailOTPSuccess: (state) => {
+      state.verifyEmailOTPLoading = false;
+      state.errorVerifyEmailOtp = null;
+    },
+    verifyEmailOTPFailure: (state, action) => {
+      state.verifyEmailOTPLoading = false;
+      state.errorVerifyEmailOtp = action.payload;
+    },
+
     deleteUserStart: (state) => {
       state.loading = true;
       state.error = null;
@@ -104,6 +136,12 @@ export const {
   updatePasswordSuccess,
   updatePasswordStart,
   updatePasswordFailure,
+  sendEmailOTPStart,
+  sendEmailOTPSuccess,
+  sendEmailOTPFailure,
+  verifyEmailOTPStart,
+  verifyEmailOTPSuccess,
+  verifyEmailOTPFailure,
   deleteUserStart,
   deleteUserSuccess,
   deleteUserFailure,
